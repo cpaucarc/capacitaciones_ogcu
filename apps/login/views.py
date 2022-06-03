@@ -20,10 +20,11 @@ class LoginView(FormView):
         username = form.cleaned_data["username"]
         password = form.cleaned_data["password"]
         user = auth.authenticate(username=username, password=password)
+        #breakpoint()
         if user and user.is_active:
             auth.login(self.request, user)
             if user.username != 'admin':
-                self.request.session['tipo_persona_desc'] = user.persona.get_tipo_persona_display()
+                self.request.session['tipo_persona_desc'] = 'Es una persona' #user.persona.get_tipo_persona_display()
                 self.request.session['tipo_persona'] = user.persona.tipo_persona
                 self.request.session['fullname'] = user.persona.nombre_completo
                 if self.request.session.get('tipo_persona') == TIPO_PERSONA_CONSEJO_FACULTAD:
