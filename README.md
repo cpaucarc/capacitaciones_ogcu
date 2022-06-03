@@ -1,6 +1,6 @@
-# sis_capacitaciones_unasam
+# Django Project
 
-# Instalacion y despliegue
+## Instalacion y despliegue
     - instalar python3.9 en ubuntu 18.04
     - sudo apt update
     - sudo apt install software-properties-common
