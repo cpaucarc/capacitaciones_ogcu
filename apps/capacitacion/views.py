@@ -482,7 +482,7 @@ class ActaAsistenciaCreateView(LoginRequiredMixin, BaseLogin, CreateView):
                 else:
                     cont_error += 1
             if cont_error > 0:
-                self.msg = 'Verificar que las cabeceras fecha tengan el formato DD-MM-YYYY'
+                self.msg = 'Verificar que las cabeceras fecha tengan el formato DD-MM-YYYY -> ' + str(cont_error)
                 messages.warning(self.request, self.msg)
                 return render(request, self.template_name, context)
             if (columnas[0] != 'tipo_doc' or columnas[1] != 'num_doc' or columnas[2] != 'nombres'
@@ -870,7 +870,7 @@ class GeneraCertificadoPdf(LoginRequiredMixin, PdfCertView):
             data[0] = ['', self.persona.nombre_completo, '']
             res_correlativo = CertEmitido.objects.filter(modulo__capacitacion=self.capacitacion,
                                                          persona=self.persona,
-                                                         cargo=self.persona.cargo,
+                                                         cargo=self.persona.cargo_miembro,
                                                          tipo=TIPO_CERT_EMITIDO_UNICO).first()
             if res_correlativo:
                 n_correlativo = res_correlativo.correlativo
