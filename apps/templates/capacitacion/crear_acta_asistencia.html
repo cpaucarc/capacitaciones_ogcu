@@ -8,11 +8,11 @@
 <div class="col-12">
   <div class="panel panel-primary">
     <div class="panel-heading">
-      <h5>Acta de asistencia
+      <h5 class="panel-title">Acta de asistencia
         <label class="pull-right">
-          User: <label class="text-success">{{username}}-{{tipo_persona_desc}}</label>
+          User: <strong>{{username}}-{{tipo_persona_desc}}</strong>
           {% if tipo_persona == 'consejo_facultad' %}
-            Facultad: <label class="text-success">{{facultad}}</label>
+            Facultad: <i>{{facultad}}</i>
           {% endif %}
         </label>
       </h5>

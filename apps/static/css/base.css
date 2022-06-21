@@ -1,11 +1,11 @@
 .ina {
   display: none !important;
 }
-
+/*
 body {
   color: black;
 }
-
+*/
 .white {
   color: white;
 }
@@ -16,7 +16,7 @@ table {
 
 .container-fluid {
   padding-left: 0;
-  background-color: #3c8dbc;
+  background-color: #222D32;
   height:50px;
 }
 
@@ -53,7 +53,7 @@ table {
 
 .style-2::-webkit-scrollbar-thumb {
   background-color: #222d32;
-  border-radius: 10px;
+  /*border-radius: 10px;*/
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
 }
 
@@ -67,7 +67,7 @@ table {
 
 .style-2::-webkit-scrollbar-track {
   background-color: #9a9a9a;
-  border-radius: 10px;
+/*  border-radius: 10px;*/
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
@@ -119,12 +119,12 @@ table {
   font-size: 3.5em;
 }
 
-.btn {
+/*.btn {
   color: white;
-}
+}*/
 
 /*panels*/
-.panel-success .panel-heading .boton-add, .btn-success {
+/*.panel-success .panel-heading .boton-add, .btn-success {
   background-color: #378a37 !important;
   border-color: #378a37;
 }
@@ -195,7 +195,7 @@ table {
 .pagination > .active > a {
   background-color: #96a8ae !important;
 }
-
+*/
 /*NAV*/
 .navbar {
   /*background-color: #3c8dbc;*/
@@ -216,7 +216,7 @@ table {
 }
 
 .logo-box {
-  background-color: #367fa9;
+  /*background-color: #367fa9;*/
   max-height: 4.5em;
   height: 3.30em;
   width: 6em;

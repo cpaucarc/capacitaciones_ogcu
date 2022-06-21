@@ -8,13 +8,13 @@
 <div class="col-12">
   <div class="panel panel-primary">
     <div class="panel-heading">
-      <h5>Asignar firmantes al proyecto de capacitación
+      <h5 class="panel-title">Asignar firmantes al proyecto de capacitación
         <label class="pull-right">
-          User: <label class="text-success">{{username}} {{tipo_persona_desc}}</label>
+          User: <strong>{{username}} {{tipo_persona_desc}}</strong>
         </label>
       </h5>
-      <div>Proyecto: <label class="text-success">{{capacitacion.nombre}}</label></div>
-      <div>Facultad: <label class="text-success">{{capacitacion.facultad|yesno:"capacitacion.facultad,-"}}</label></div>
+      <div>Proyecto: <i>{{capacitacion.nombre}}</i></div>
+      <div>Facultad: <i>{{capacitacion.facultad|yesno:"capacitacion.facultad,-"}}</i></div>
     </div>
     <br>
     <div class="panel-body">

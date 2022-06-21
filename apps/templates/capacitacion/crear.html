@@ -8,13 +8,13 @@
 <div class="col-12">
   <div class="panel panel-primary">
     <div class="panel-heading">
-      <h5>Proyecto de Capacitación
-        <label class="pull-right">
-          User: <label class="text-success">{{username}} {{tipo_persona_desc}}</label>
+      <h5 class="panel-title">Proyecto de Capacitación
+        <span class="pull-right">
+          User: <strong>{{username}} {{tipo_persona_desc}}</strong>
           {% if tipo_persona == 'consejo_facultad' %}
-            Facultad: <label class="text-success">{{facultad}}</label>
+            Facultad: <i>{{facultad}}</i>
           {% endif %}
-        </label>
+        </span>
       </h5>
     </div>
     <div class="panel-body">
