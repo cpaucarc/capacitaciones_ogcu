@@ -391,8 +391,8 @@ table {
 
 /*page content */
 #wrapper #page-content-wrapper {
-  margin-left: -80px;
-  margin-right: 0;
+  /*margin-left: -80px;
+  margin-right: 0;*/
   position: relative;
   transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
@@ -402,10 +402,7 @@ table {
 }
 
 .mi-slider .container {
-  left: 11%;
-  margin-top: 6rem;
-  position: absolute;
-  right: 6rem;
+  margin-top: 8rem;
 }
 
 /*dashboard*/
@@ -635,8 +632,9 @@ table {
 
 @media (max-width: 980px) {
   .mi-slider .container {
-    left: 24%;
-    width: 74%;
+    /*left: 24%;
+    width: 74%;*/
+    width: 95%;
   }
 }
 
@@ -690,8 +688,9 @@ table {
 
 @media only screen and (min-width: 992px) {
   .mi-slider .container {
-    left: 16%;
-    width: 80%;
+/*    left: 16%;
+    width: 80%;*/
+    width: 95%;
   }
 }
 
@@ -785,7 +784,7 @@ input[type="checkbox"] {
 }
 
 .logo-peque{
-  width:60px;
+  width:36px;
 }
 
 .col-form-label{
@@ -834,6 +833,12 @@ input[type="checkbox"] {
 
 #icon-usuario{
   font-size:25px;
+  margin-top:5px;
+  padding:5px;
+}
+
+/*Estilos para navbar*/
+.icon-usuario{
   margin-top:5px;
   padding:5px;
 }
