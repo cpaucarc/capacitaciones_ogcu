@@ -1,30 +1,66 @@
 {% load static %}
-<nav class="navbar no-print" xmlns:p.punto_vacunacion.id>
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <div class="logo-box"><a href="/">
-        <img src="{% static 'img/logo-unasam.png' %}" class="logo-peque center-block"></a>
-      </div>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-header">
+                <div class="logo-box"><a href="/">
+                    <img src="{% static 'img/logo-unasam.png' %}" class="logo-peque center-block"></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                {% if username == 'admin' or tipo_persona == 'consejo_facultad' %}
+                    <li class="{% ifequal request.path '/capacitacion' %} active {% endifequal %}">
+                        <a href="/capacitacion">Capacitación </a>
+                    </li>
+                {% endif %}
+                {% if username == 'admin' or tipo_persona == 'consejo_unasam' %}
+                    <li class="{% ifequal request.path '/crear-persona' %} active {% endifequal %}">
+                        <a href="/crear-persona">Personas </a>
+                    </li>
+                    <li class="{% ifequal request.path '/crear-firmante' %} active {% endifequal %}">
+                        <a href="/crear-firmante">Firmantes </a>
+                    </li>
+                    <li class="{% ifequal request.path '/bandeja-validacion' %} active {% endifequal %}">
+                        <a href="/bandeja-validacion" hover="color:white">Validar proyecto </a>
+                    </li>
+                {% endif %}
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <div class="desaparece-movil" style="font-size:14px;">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown dropdown-toggle"
+                            data-toggle="dropdown" role="button" aria-haspopup="true"
+                            aria-expanded="false">
+                            {#<span class="nameUser white nombre ellipsis desaparece-movil">{{ username }} {{ fullname }}</span>#}
+                            <i class="fa-solid fa-circle-user white" id="icon-usuario"></i>
+                            <i class="fa-solid fa-caret-down white"></i>
+                            {# <span class="caret white"></span>#}
+                        </li>
+                        <ul class="dropdown-menu">
+                            <li><a>Registrado como <br> <strong> {{ username }}</strong> </a></li>
+                            <li><a>{{ fullname }}</a></li>
+                            <li role="separator" class="divider"></li>
+                            {% if user.is_authenticated %}
+                                <li><a href="/accounts/password_change/">Cambiar contraseña</a></li>
+                                {#<li><a href="/manual" target="_blank">Manual Conteo Rápido</a></li>#}
+                            {% endif %}
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/accounts/logout/">Cerrar Sesión</a></li>
+                        </ul>
+                    </ul>
+                </div>
+            </ul>
+        </div>
     </div>
-    <button class="navbar-toggle collapse in  no-padding " data-toggle="collapse" id="menu-toggle-3"><span
-        class="fa fa-indent" aria-hidden="true"></span></button>
-    <div class="desaparece-movil" style="font-size:11px;">
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-            aria-expanded="false">
-          <span class="nameUser white nombre ellipsis desaparece-movil">{{username}} {{fullname}}</span>
-          <i class="fa fa-user white" id="icon-usuario"></i>
-          <span class="caret white"></span>
-        </li>
-        <ul class="dropdown-menu">
-          {% if user.is_authenticated %}
-            <li><a href="/accounts/password_change/">Cambiar contraseña</a></li>
-            {#<li><a href="/manual" target="_blank">Manual Conteo Rápido</a></li>#}
-          {% endif %}
-          <li role="separator" class="divider"></li>
-          <li><a href="/accounts/logout/">Cerrar Sesión</a></li>
-        </ul>
-      </ul>
-    </div>
-  </div>
 </nav>

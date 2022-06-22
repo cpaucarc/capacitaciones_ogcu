@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap-flat.css' %}">
     <link rel="stylesheet" href="{% static 'vendor/sweetalert2/sweetalert2.min.css' %}">
     <link rel="stylesheet" href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}"/>
-    <link rel="stylesheet" href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/font-awesome/css/all.min.css' %}">
     <link rel="stylesheet" href="{% static 'vendor/select2/css/select2.min.css' %}">
     <link rel="stylesheet" href="{% static 'vendor/select2/css/select2-bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'vendor/bootstrap-toggle/bootstrap-toggle.min.css' %}"/>
@@ -28,9 +28,9 @@
   {% endblock %}
   {% block _wrapper %}
     <div id="wrapper">
-      {% block nav %}
-        {% include "base_partials/_nav.html" %}
-      {% endblock %}
+{#      {% block nav %}#}
+{#        {% include "base_partials/_nav.html" %}#}
+{#      {% endblock %}#}
       <section id="page">
         <div id="loading" class="no-print"></div>
         <div id="page-content-wrapper">
