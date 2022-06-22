@@ -5538,6 +5538,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 
 .navbar-default .navbar-collapse,
 .navbar-default .navbar-form {
+    background-color: #222D32;
     border-color: #e7e7e7;
 }
 
