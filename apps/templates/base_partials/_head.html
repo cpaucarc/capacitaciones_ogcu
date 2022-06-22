@@ -14,7 +14,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="/"><img src="{% static 'img/logo-ogcu.png' %}" class="logo-peque"></a>
+                    <a href="/"><img src="{% static 'img/logo-ogcu-white.png' %}" class="logo-peque"></a>
                 </li>
                 {% if username == 'admin' or tipo_persona == 'consejo_facultad' %}
                     <li class="{% ifequal request.path '/capacitacion' %} active {% endifequal %}">
