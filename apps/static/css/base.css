@@ -15,8 +15,8 @@ table {
 }
 
 .container-fluid {
-  padding-left: 0;
-  background-color: #222D32;
+  /*padding-left: 0;*/
+  /*background-color: #222D32;*/
   height:50px;
 }
 
@@ -784,7 +784,8 @@ input[type="checkbox"] {
 }
 
 .logo-peque{
-  width:36px;
+  width:48px;
+  margin-top: -12px;
 }
 
 .col-form-label{
