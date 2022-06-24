@@ -22,7 +22,7 @@ from django.views import View
 from django.views.generic import CreateView, UpdateView, TemplateView
 from django.urls import reverse
 from reportlab.lib import colors
-from reportlab.lib.enums import TA_CENTER, TA_JUSTIFY
+from reportlab.lib.enums import TA_CENTER, TA_JUSTIFY, TA_RIGHT
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.utils import ImageReader
 from reportlab.platypus import Table, Paragraph, Image
@@ -50,7 +50,6 @@ from apps.persona.models import Persona, Firmante
 from config.settings import MEDIA_ROOT, STATIC_ROOT
 import pandas as pd
 from reportlab.lib.pagesizes import letter
-
 
 class CapacitacionCreateView(LoginRequiredMixin, BaseLogin, CreateView):
     template_name = 'capacitacion/crear.html'
@@ -760,27 +759,32 @@ class GeneraCertificadoPdf(LoginRequiredMixin, PdfCertView):
     def encabezado(self):
         lWidth, lHeight = 'A4'
         self.canvas.setPageSize((lHeight, lWidth))
+        self.canvas.setFont('Helvetica', 13)
         self.style = getSampleStyleSheet()['BodyText']
-        self.style.fontName = 'Times-Bold'
         self.style.alignment = TA_CENTER
-        self.style.fontSize = 11
+        self.style.fontSize = 10
         self.style1 = getSampleStyleSheet()['Normal']
         self.style1.fontSize = 6
         self.style2 = getSampleStyleSheet()['Normal']
-        self.style2.fontSize = 30
+        self.style2.fontSize = 15
         self.style2.alignment = TA_CENTER
-        self.style2.fontName = 'Times-Bold'
         self.style3 = getSampleStyleSheet()['Normal']
-        self.style3.fontSize = 12
+        self.style3.fontSize = 13
         self.style3.alignment = TA_CENTER
         self.style4 = getSampleStyleSheet()['Normal']
         self.style4.fontSize = 12
-        self.style4.fontName = 'Times-Roman'
         self.style4.alignment = TA_JUSTIFY
+        self.style4.leading  = 26
         self.style4.padding = '20px'
         self.style5 = getSampleStyleSheet()['Normal']
         self.style5.fontSize = 16
         self.style5.alignment = TA_CENTER
+        self.style_fullname = getSampleStyleSheet()['Normal']
+        self.style_fullname.fontSize = 13
+        self.style_fullname.alignment = TA_CENTER
+        self.style_right = getSampleStyleSheet()['Normal']
+        self.style_right.fontSize = 12.5
+        self.style_right.alignment = TA_RIGHT
 
     def generar_code_qr(self):
         qr = qrcode.QRCode(
@@ -796,9 +800,8 @@ class GeneraCertificadoPdf(LoginRequiredMixin, PdfCertView):
         img.save(self.path_code_qr)
         imagen = os.path.join(self.path_code_qr)
         width = 60
-        y_start = 1
-        self.canvas.drawImage(ImageReader(imagen), 270, y_start - 55, width=width, preserveAspectRatio=True,
-                              mask='auto')
+        y_start = 10
+        self.canvas.drawImage(ImageReader(imagen), 270, y_start - 55, width=width, preserveAspectRatio=True, mask='auto')
         os.remove(self.path_code_qr)
 
     def obtener_path_temporal_firma(self, id, firma):
@@ -812,8 +815,7 @@ class GeneraCertificadoPdf(LoginRequiredMixin, PdfCertView):
         return path
 
     def get_certificados(self, **kwargs):
-        mes = ["", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre",
-               "Octubre", "Noviembre", "Diciembre"]
+        mes = ["", "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre","octubre", "noviembre", "diciembre"]
         table_style1 = [
             ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
             ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
@@ -823,50 +825,53 @@ class GeneraCertificadoPdf(LoginRequiredMixin, PdfCertView):
             ('BOTTOMPADDING', (0, 0), (-1, -1), 0),
             ('FONTSIZE', (0, 1), (0, -1), 10),
         ]
-        model_cert1 = os.path.join(F'{STATIC_ROOT}', 'img', 'mod_cert1.png')
-        self.canvas.drawImage(ImageReader(model_cert1), -4, -2, 620, 795)
-        table_style4 = [('ALIGN', (0, 0), (-1, -1), 'CENTER'), ('FONTSIZE', (0, 0), (-1, -1), 20), ]
+        #model_cert1 = os.path.join(F'{STATIC_ROOT}', 'img', 'mod_cert1.png')
+        #self.canvas.drawImage(ImageReader(model_cert1), -4, -2, 620, 795)
+        table_style4 = [('ALIGN', (0, 0), (-1, -1), 'CENTER'), ('FONTSIZE', (0, 0), (-1, -1), 12), ]
         data2 = [[]] * 4
         data = [[]] * 4
         data6 = [[]] * 4
         contador = 0
+        
         # Datos del certificado
-        model_cert1 = os.path.join(F'{STATIC_ROOT}', 'img', 'mod_cert1.png')
-        self.canvas.drawImage(ImageReader(model_cert1), -4, -2, 620, 795)
-        cabecera1 = Paragraph('UNIVERSIDAD NACIONAL', style=self.style5)
-        cabecera2 = Paragraph('SANTIAGO ANTUNEZ DE MAYOLO', style=self.style5)
-        w, h = cabecera1.wrap(400, 0)
-        cabecera1.drawOn(self.canvas, 105, 750 - h)
-        w, h = cabecera2.wrap(400, 0)
-        cabecera2.drawOn(self.canvas, 105, 728 - h)
-        logo_unasam = os.path.join(F'{STATIC_ROOT}', 'img', 'logo-unasam.jpg')
-        self.canvas.drawImage(ImageReader(logo_unasam), 231, 565, 147, 120)
-        titulo = Paragraph('CERTIFICADO', style=self.style2)
-        data2[0] = [titulo]
-        ta = Table(data=data2, rowHeights=20, repeatCols=1, colWidths=610)
-        ta.setStyle(table_style4)
-        w, h = ta.wrap(0, 0)
-        ta.drawOn(self.canvas, 1, 475)
-        otorgado = Paragraph('Otorgado a:', style=self.style3)
-        w, h = otorgado.wrap(100, 0)
-        otorgado.drawOn(self.canvas, 45, 470 - h)
-        # Nombre del participante
+        logo_unasam = os.path.join(F'{STATIC_ROOT}', 'img', 'unasam_logo_oficial.jpg')
+        logo_ogcu = os.path.join(F'{STATIC_ROOT}', 'img', 'ogcu_logo_oficial.jpg')
+        self.canvas.drawImage(ImageReader(logo_unasam), 100, 645, 90, 90)
+        self.canvas.drawImage(ImageReader(logo_ogcu), 360, 645, 124, 90)
+
+        titulo = Paragraph('<b>CERTIFICADO</b>', style=self.style2)
+        w, h = titulo.wrap(440, 0)
+        titulo.drawOn(self.canvas, 85, 595 - h)
+
+        otorgado = Paragraph('El Centro de Educación Continua de la Universidad Nacional Santiago Antúnez de Mayolo certifica que:',
+            style=self.style4)
+        w, h = otorgado.wrap(440, 0)
+        otorgado.drawOn(self.canvas, 85, 535 - h)
+        
+        nombre_completo = Paragraph('<b>{}</b>'.format(self.persona.nombre_completo.upper()), style=self.style_fullname)
+        w, h = nombre_completo.wrap(440, 0)
+        nombre_completo.drawOn(self.canvas, 85, 480 - h)
+
         contador += 1
         n_correlativo = ''
+        
         if 'PRESENCIAL' in self.capacitacion.canal_reunion.upper():
             tipo_canal = 'presencial'
         else:
             tipo_canal = 'virtual'
+        
         if self.miembro:
-            parrafo1 = Paragraph('''Por haber participado en calidad de <b>"{}"</b> en el Curso de
-                                 <b>"{}"</b>, llevado a cabo en forma {}, del {} al {} con una duración de <b>{} horas 
-                                 académicas</b>.'''.format(self.miembro.get_cargo_display(),
+            parrafo1 = Paragraph('''participó en calidad de {} en el Curso de {}, desarrollado de forma {} del {} de {} de {}
+            al {} de {} de {} con un total de {} horas académicas.'''.format(self.miembro.get_cargo_display(),
                                                            self.capacitacion.nombre,
                                                            tipo_canal,
-                                                           self.capacitacion.fecha_inicio.strftime('%d/%m/%Y'),
-                                                           self.capacitacion.fecha_fin.strftime('%d/%m/%Y'),
-                                                           self.horas_academicas),
-                                 style=self.style4)
+                                                            self.capacitacion.fecha_inicio.day,
+                                                            mes[self.capacitacion.fecha_inicio.month],
+                                                            self.capacitacion.fecha_inicio.year,
+                                                            self.capacitacion.fecha_fin.day,
+                                                            mes[self.capacitacion.fecha_fin.month],
+                                                            self.capacitacion.fecha_fin.year,
+                                                           self.horas_academicas), style=self.style4)
             data[0] = ['', self.persona.nombre_completo, '']
             res_correlativo = CertEmitido.objects.filter(modulo__capacitacion=self.capacitacion,
                                                          persona=self.persona,
@@ -875,12 +880,14 @@ class GeneraCertificadoPdf(LoginRequiredMixin, PdfCertView):
             if res_correlativo:
                 n_correlativo = res_correlativo.correlativo
         else:
-            parrafo1 = Paragraph('''Por haber participado en calidad de <b>"Asistente"</b> en el Curso de
-                                     <b>"{}"</b>, llevado a cabo en forma {}, del {} al {} con una duración de <b>{}
-                                      horas académicas</b>.'''.format(self.capacitacion.nombre, tipo_canal,
-                                                                      self.capacitacion.fecha_inicio.strftime(
-                                                                          '%d/%m/%Y'),
-                                                                      self.capacitacion.fecha_fin.strftime('%d/%m/%Y'),
+            parrafo1 = Paragraph('''aprobó satisfactoriamente el Curso de {}, desarrollado de forma {} del {} de {} de {}
+            al {} de {} de {} con un total de {} horas académicas.'''.format(self.capacitacion.nombre, tipo_canal,
+                                                                      self.capacitacion.fecha_inicio.day,
+                                                                      mes[self.capacitacion.fecha_inicio.month],
+                                                                      self.capacitacion.fecha_inicio.year,
+                                                                      self.capacitacion.fecha_fin.day,
+                                                                      mes[self.capacitacion.fecha_fin.month],
+                                                                      self.capacitacion.fecha_fin.year,
                                                                       self.horas_academicas), style=self.style4)
             res_correlativo = CertEmitido.objects.filter(modulo__capacitacion=self.capacitacion,
                                                          persona=self.persona,
@@ -888,18 +895,14 @@ class GeneraCertificadoPdf(LoginRequiredMixin, PdfCertView):
                                                          tipo=TIPO_CERT_EMITIDO_UNICO).first()
             if res_correlativo:
                 n_correlativo = res_correlativo.correlativo
-            data[0] = ['', self.persona.nombre_completo, '']
-        data[1] = ['', '', '']
-        data[2] = ['', '', '']
-        data[3] = ['', parrafo1, '']
-        tab = Table(data=data, rowHeights=20, repeatCols=1, colWidths=[55, 500, 55])
-        tab.setStyle(table_style4)
-        w, h = tab.wrap(0, 0)
-        tab.drawOn(self.canvas, 1, 400)
-        self.canvas.setFont('Helvetica', 10)
-        self.canvas.drawString(100, 365, 'Huaraz, {} de {} de {}'.format(self.fecha_culminado.day,
-                                                                         mes[self.fecha_culminado.month],
-                                                                         self.fecha_culminado.year))
+
+        w, h = parrafo1.wrap(440, 0)
+        parrafo1.drawOn(self.canvas, 85, 445 - h)
+        
+        fecha_lugar = Paragraph('Huaraz, {} de {} de {}'.format(self.fecha_culminado.day, mes[self.fecha_culminado.month], self.fecha_culminado.year),
+            style=self.style_right)
+        w, h = fecha_lugar.wrap(440, 0)
+        fecha_lugar.drawOn(self.canvas, 85, 350 - h)
 
         responsables_firma = self.capacitacion.responsablefirma_set.all()
         cx = 0
@@ -907,7 +910,7 @@ class GeneraCertificadoPdf(LoginRequiredMixin, PdfCertView):
         table_style = [
             ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
             ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-            ('FONTSIZE', (0, 0), (-1, -1), 8),
+            ('FONTSIZE', (0, 0), (-1, -1), 10),
         ]
         for f in responsables_firma:
             data3 = [['']]
@@ -916,62 +919,65 @@ class GeneraCertificadoPdf(LoginRequiredMixin, PdfCertView):
             if f.firmante.firma:
                 path_temp_firma = self.obtener_path_temporal_firma(f.id, f.firmante.firma)
             if path_temp_firma:
-                a = Image(path_temp_firma, width=85, height=85)
+                a = Image(path_temp_firma, width=110, height=80)
                 data3[0] = [a]
             tt = Table(data=data3, rowHeights=70, repeatCols=1, colWidths=230)
             tt.setStyle(table_style)
             w, h = tt.wrap(0, 0)
             if cant_firmas == 2:
-                tt.drawOn(self.canvas, 65 + cx, 250)
-            else:
-                tt.drawOn(self.canvas, 50 + cx, 250)
-            data4[0] = ['---------------------------------------------------------']
-            data4[1] = [f.firmante]
-            data4[2] = [f.get_tipo_firma_display()]
-            tt = Table(data=data4, rowHeights=10, repeatCols=1, colWidths=230)
-            tt.setStyle(table_style)
-            w, h = tt.wrap(0, 0)
-            if cant_firmas == 2:
                 tt.drawOn(self.canvas, 65 + cx, 215)
             else:
-                tt.drawOn(self.canvas, 37 + cx, 215)
+                tt.drawOn(self.canvas, 50 + cx, 215)
+            data4[0] = ['__________________________________']
+            data4[1] = [str(f.firmante).upper()]
+            data4[2] = [f.get_tipo_firma_display()]
+            tt = Table(data=data4, rowHeights=14, repeatCols=1, colWidths=230)
+            tt.setStyle(table_style)
+            w, h = tt.wrap(0, 0)
+
             if cant_firmas == 2:
+                tt.drawOn(self.canvas, 65 + cx, 170)
                 cx += 250
             else:
+                tt.drawOn(self.canvas, 37 + cx, 170)
                 cx += 150
+
             if path_temp_firma:
                 os.remove(path_temp_firma)
+
         self.generar_code_qr()
-        titulo1 = Paragraph('VICERRECTORADO ACADÉMICO', style=self.style3)
-        sub_titulo1 = Paragraph('Consejo de Capacitación, Especialización y Actualización Docente',
-                                style=self.style3)
-        titulo2 = Paragraph('CCEAD UNASAM', style=self.style3)
+
+        titulo1 = Paragraph('VICERRECTORADO ACADÉMICO', style=self.style)
+        sub_titulo1 = Paragraph('Consejo de Capacitación, Especialización y Actualización Docente', style=self.style)
+        titulo2 = Paragraph('CCEAD UNASAM', style=self.style)
         data6[0] = [titulo1]
         data6[1] = [sub_titulo1]
         data6[2] = [titulo2]
-        ta = Table(data=data6, rowHeights=20, repeatCols=1, colWidths=610)
+        ta = Table(data=data6, rowHeights=15, repeatCols=1, colWidths=610)
         ta.setStyle(table_style4)
         w, h = ta.wrap(0, 0)
-        ta.drawOn(self.canvas, 1, 4)
+        ta.drawOn(self.canvas, 1, 25)
         self.canvas.showPage()
+
         cxx = 0
         conta = 0
         codigo_barra = code128.Code128(barWidth=1.2, barHeight=25)
         codigo_barra.value = n_correlativo
-        codigo_barra.drawOn(self.canvas, x=215, y=745)
-        self.canvas.drawString(278, 730, n_correlativo)
+        codigo_barra.drawOn(self.canvas, x=215, y=730)
+        self.canvas.drawString(278, 715, n_correlativo)
+
         if len(self.temarios) == 1:
             temas = self.temarios[0].split('\n')
             data1 = [[]] * (len(temas) + 1)
             conta += 1
-            mod = Paragraph('Temario', style=self.style)
+            mod = Paragraph('<b>Temario</b>', style=self.style)
             data1[0] = [mod]
             for x in range(1, len(temas) + 1):
                 data1[x] = [temas[x - 1].strip()]
-            tbl = Table(data=data1, rowHeights=30, repeatCols=1, colWidths=[513])
+            tbl = Table(data=data1, rowHeights=30, repeatCols=1, colWidths=[439])
             tbl.setStyle(table_style1)
             w, h = tbl.wrap(0, 0)
-            tbl.drawOn(self.canvas, 50 + cxx, 700 - h)
+            tbl.drawOn(self.canvas, 87 + cxx, 680 - h)
             cxx += 20
             self.canvas.showPage()
         else:
@@ -979,7 +985,7 @@ class GeneraCertificadoPdf(LoginRequiredMixin, PdfCertView):
                 temas = t.split('\n')
                 data1 = [[]] * (len(temas) + 1)
                 conta += 1
-                mod = Paragraph('Temario del Módulo {}'.format(conta), style=self.style)
+                mod = Paragraph('<b>Temario del Módulo {}</b>'.format(conta), style=self.style)
                 data1[0] = [mod]
                 trow = 20
                 espace = 0
@@ -996,10 +1002,10 @@ class GeneraCertificadoPdf(LoginRequiredMixin, PdfCertView):
                         te2 = temas[x - 1].strip()[pos_te:]
                         te3 = '{}\n  {}'.format(te1, te2)
                     data1[x] = [te3]
-                tbl = Table(data=data1, rowHeights=trow, repeatCols=1, colWidths=[513])
+                tbl = Table(data=data1, rowHeights=trow, repeatCols=1, colWidths=[439])
                 tbl.setStyle(table_style1)
                 w, h = tbl.wrap(0, 0)
-                tbl.drawOn(self.canvas, 50, (700 - h) - cxx + espace)
+                tbl.drawOn(self.canvas, 87, (680 - h) - cxx + espace)
                 cxx += 50 + (tem * 20)
             self.canvas.showPage()
 
@@ -1565,7 +1571,7 @@ class GenerarMultipleCertificadosPdfView(LoginRequiredMixin, PdfCertView):
             # Datos del certificado
             model_cert1 = os.path.join(F'{STATIC_ROOT}', 'img', 'mod_cert1.png')
             self.canvas.drawImage(ImageReader(model_cert1), -4, -2, 620, 795)
-            cabecera1 = Paragraph('UNIVERSIDAD NACIONAL', style=self.style5)
+            cabecera1 = Paragraph('UNIVERSIDAD NACIONAL 2', style=self.style5)
             cabecera2 = Paragraph('SANTIAGO ANTUNEZ DE MAYOLO', style=self.style5)
             w, h = cabecera1.wrap(400, 0)
             cabecera1.drawOn(self.canvas, 105, 750 - h)
@@ -2016,7 +2022,7 @@ class GeneraCertificadoPdfPorModulo(LoginRequiredMixin, PdfCertView):
             # Datos del certificado
             model_cert1 = os.path.join(F'{STATIC_ROOT}', 'img', 'mod_cert1.png')
             self.canvas.drawImage(ImageReader(model_cert1), -4, -2, 620, 795)
-            cabecera1 = Paragraph('UNIVERSIDAD NACIONAL', style=self.style5)
+            cabecera1 = Paragraph('UNIVERSIDAD NACIONAL 3', style=self.style5)
             cabecera2 = Paragraph('SANTIAGO ANTUNEZ DE MAYOLO', style=self.style5)
             w, h = cabecera1.wrap(400, 0)
             cabecera1.drawOn(self.canvas, 105, 750 - h)
@@ -2331,7 +2337,7 @@ class GenerarMultipleCertificadosPorModPdfView(LoginRequiredMixin, PdfCertView):
             # Datos del certificado
             model_cert1 = os.path.join(F'{STATIC_ROOT}', 'img', 'mod_cert1.png')
             self.canvas.drawImage(ImageReader(model_cert1), -4, -2, 620, 795)
-            cabecera1 = Paragraph('UNIVERSIDAD NACIONAL', style=self.style5)
+            cabecera1 = Paragraph('UNIVERSIDAD NACIONAL 4', style=self.style5)
             cabecera2 = Paragraph('SANTIAGO ANTUNEZ DE MAYOLO', style=self.style5)
             w, h = cabecera1.wrap(400, 0)
             cabecera1.drawOn(self.canvas, 105, 750 - h)
