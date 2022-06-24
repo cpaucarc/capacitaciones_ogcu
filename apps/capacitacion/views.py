@@ -1116,7 +1116,7 @@ class ListaCapacitacionValidarView(LoginRequiredMixin, BaseLogin, View):
             link = reverse('capacitacion:generar_certificados', kwargs={'id': a.id})
             boton = ''
             if a.responsablefirma_set.exists():
-                boton = '<a class="btn btn-success btn-xs" href="{0}"><i class="fa fa-print"> Único PDF</i></a>'
+                boton = '<a class="btn btn-success btn-xs" href="{0}"><i class="fa fa-print"></i> Único PDF</a>'
             boton = boton.format(link)
             boton = '{0}'.format(boton)
             return boton
@@ -1135,7 +1135,7 @@ class ListaCapacitacionValidarView(LoginRequiredMixin, BaseLogin, View):
             cc = 0
             link1 = reverse('capacitacion:generar_certificados', kwargs={'id': a.id})
             bot = '''<a class="btn btn-success btn-xs" href="{0}" style="margin-top:2px;margin-left:2px;">
-                  <i class="fa fa-print"> Único PDF</i></a>'''.format(link1)
+                  <i class="fa fa-print"></i> Único PDF</a>'''.format(link1)
             for m in self.array_modulos:
                 cc += 1
                 link = reverse('capacitacion:generar_certificados_por_mod', kwargs={'id': a.id, 'id_modulo': m.id})
@@ -1155,7 +1155,7 @@ class ListaCapacitacionValidarView(LoginRequiredMixin, BaseLogin, View):
             boton = ''
             if a.responsablefirma_set.exists():
                 boton = '''<button class="btn btn-info btn-xs enviar-correo ev-{}" data-id="{}">
-                <i class="fa fa-envelope"> Enviar</i></button>'''
+                <i class="fa fa-envelope"></i> Enviar</button>'''
             boton = boton.format(a.id, a.id)
             boton = '{0}'.format(boton)
             return boton
@@ -1180,7 +1180,7 @@ class ListaCapacitacionValidarView(LoginRequiredMixin, BaseLogin, View):
                 boton1 = '<label class="text-success">Correo enviado</label>'.format(cc)
             else:
                 boton1 = '''<button class="btn btn-info btn-xs enviar-correo ev-{}" data-id="{}">
-                <i class="fa fa-envelope"> Enviar</i></button>'''
+                <i class="fa fa-envelope"></i> Enviar</button>'''
             for m in self.array_modulos:
                 cc += 1
                 boton = ''
