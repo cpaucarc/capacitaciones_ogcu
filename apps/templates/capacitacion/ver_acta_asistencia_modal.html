@@ -35,8 +35,8 @@
                style="width: 100%;">
           <thead>
           <tr>
-            <th>N</th>
-            <th>NumDoc</th>
+            <th>N°</th>
+            <th>Documento</th>
             <th>Apellidos y Nombres</th>
             {% for f in fechas_unicas %}
             <th>{{f.fecha|date:'d-m-y'}}</th>
@@ -52,8 +52,8 @@
               <th>Cert. Módulo</th>
               <th>Envío Correo</th>
             {% elif mostrar_pdf %}
-              <th>Cert.</th>
-              <th>Envío Correo</th>
+              <th>Certificado</th>
+              <th>Envío por Correo</th>
             {% endif %}
             {% endif %}
             {% endif %}
@@ -98,20 +98,20 @@
             {% endif %}
               <td>
                 {% if tipo_emision_cert == 'certificado_unico' %}
-                  <button class="btn btn-info btn-xs enviar-correo-unico elv-{{l.id_acta}}-{{l.id_persona}}" data-id="{{capacitacion_id}}"
-                        data-li="{{l.id_acta}}-{{l.id_persona}}" data-persona="{{l.id_persona}}" data-id_modulo="{{acta.modulo_id}}" style="margin-top:2px;margin-left:2px;">
-                  <i class="fa fa-envelope">Cert. Único</i></button>
+                  <button class="btn btn-info enviar-correo-unico elv-{{l.id_acta}}-{{l.id_persona}}" data-id="{{capacitacion_id}}"
+                        data-li="{{l.id_acta}}-{{l.id_persona}}" data-persona="{{l.id_persona}}" data-id_modulo="{{acta.modulo_id}}">
+                  <i class="fa fa-envelope"></i> Certificado Único</button>
                 {% elif tipo_emision_cert == 'certificado_unico_y_modulos' and mostrar_pdf_unico %}
-                  <button class="btn btn-info btn-xs enviar-correo-unico elv-{{l.id_acta}}-{{l.id_persona}}" data-id="{{capacitacion_id}}"
-                        data-li="{{l.id_acta}}-{{l.id_persona}}" data-persona="{{l.id_persona}}" data-id_modulo="{{acta.modulo_id}}" style="margin-top:2px;margin-left:2px;">
-                  <i class="fa fa-envelope">Cert. Único</i></button>
-                  <button class="btn btn-info btn-xs enviar-correo-por-mod elv-{{l.id_acta}}-{{l.id_persona}}" data-id="{{capacitacion_id}}"
-                        data-li="{{l.id_acta}}-{{l.id_persona}}" data-persona="{{l.id_persona}}" data-modulo="{{acta.modulo_id}}" style="margin-top:2px;margin-left:2px;">
-                  <i class="fa fa-envelope">Módulo</i></button>
+                  <button class="btn btn-info enviar-correo-unico elv-{{l.id_acta}}-{{l.id_persona}}" data-id="{{capacitacion_id}}"
+                        data-li="{{l.id_acta}}-{{l.id_persona}}" data-persona="{{l.id_persona}}" data-id_modulo="{{acta.modulo_id}}">
+                  <i class="fa fa-envelope"></i> Certificado Único</button>
+                  <button class="btn btn-info enviar-correo-por-mod elv-{{l.id_acta}}-{{l.id_persona}}" data-id="{{capacitacion_id}}"
+                        data-li="{{l.id_acta}}-{{l.id_persona}}" data-persona="{{l.id_persona}}" data-modulo="{{acta.modulo_id}}">
+                  <i class="fa fa-envelope"></i> Módulo</button>
                 {% else %}
-                  <button class="btn btn-info btn-xs enviar-correo-por-mod elv-{{l.id_acta}}-{{l.id_persona}}" data-id="{{capacitacion_id}}"
-                        data-li="{{l.id_acta}}-{{l.id_persona}}" data-persona="{{l.id_persona}}" data-modulo="{{acta.modulo_id}}" style="margin-top:2px;margin-left:2px;">
-                  <i class="fa fa-envelope">Módulo</i></button>
+                  <button class="btn btn-info enviar-correo-por-mod elv-{{l.id_acta}}-{{l.id_persona}}" data-id="{{capacitacion_id}}"
+                        data-li="{{l.id_acta}}-{{l.id_persona}}" data-persona="{{l.id_persona}}" data-modulo="{{acta.modulo_id}}">
+                  <i class="fa fa-envelope"></i> Módulo</button>
                 {% endif %}
               </td>
             {% endif %}
@@ -125,9 +125,9 @@
         <table class="table table-bordered table-hover table-striped table-responsive" style="width: 100%;">
           <thead>
           <tr>
-            <th>N</th>
+            <th>N°</th>
             <th>Cargo</th>
-            <th>DNI</th>
+            <th>Documento</th>
             <th>Miembro</th>
             {% if estado_capacitacion == 'culminado' %}
             {% if tipo_persona == 'consejo_unasam' or username == 'admin' %}
@@ -182,20 +182,20 @@
             {% endif %}
             <td>
               {% if tipo_emision_cert == 'certificado_unico' %}
-                <button class="btn btn-info btn-xs enviar-correo-unico-miembro emv-{{m.id}}-{{m.cargo}}" data-id="{{capacitacion_id}}" data-mi="{{m.id}}-{{m.cargo}}" data-cargo="{{m.cargo}}"
-                        data-persona="{{m.persona_id}}" style="margin-top:2px;margin-left:2px;">
-                <i class="fa fa-envelope">Cert. Único</i></button>
+                <button class="btn btn-info enviar-correo-unico-miembro emv-{{m.id}}-{{m.cargo}}" data-id="{{capacitacion_id}}" data-mi="{{m.id}}-{{m.cargo}}" data-cargo="{{m.cargo}}"
+                        data-persona="{{m.persona_id}}">
+                <i class="fa fa-envelope"></i> Certificado Único</button>
               {% elif tipo_emision_cert == 'certificado_unico_y_modulos'  and mostrar_pdf_unico %}
-                <button class="btn btn-info btn-xs enviar-correo-unico-miembro emv-{{m.id}}-{{m.cargo}}" data-id="{{capacitacion_id}}" data-mi="{{m.id}}-{{m.cargo}}" data-cargo="{{m.cargo}}"
-                        data-persona="{{m.persona_id}}" style="margin-top:2px;margin-left:2px;">
-                <i class="fa fa-envelope">Cert. Único</i></button>
-                <button class="btn btn-info btn-xs enviar-correo-por-mod-miembro emv-{{m.id}}-{{m.cargo}}" data-id="{{capacitacion_id}}"
-                        data-mi="{{m.id}}-{{m.cargo}}" data-cargo="{{m.cargo}}" data-persona="{{m.persona_id}}" data-modulo="{{acta.modulo_id}}" style="margin-top:2px;margin-left:2px;">
-                <i class="fa fa-envelope">Módulo</i></button>
+                <button class="btn btn-info enviar-correo-unico-miembro emv-{{m.id}}-{{m.cargo}}" data-id="{{capacitacion_id}}" data-mi="{{m.id}}-{{m.cargo}}" data-cargo="{{m.cargo}}"
+                        data-persona="{{m.persona_id}}">
+                <i class="fa fa-envelope"></i> Certificado Único</button>
+                <button class="btn btn-info enviar-correo-por-mod-miembro emv-{{m.id}}-{{m.cargo}}" data-id="{{capacitacion_id}}"
+                        data-mi="{{m.id}}-{{m.cargo}}" data-cargo="{{m.cargo}}" data-persona="{{m.persona_id}}" data-modulo="{{acta.modulo_id}}">
+                <i class="fa fa-envelope"></i> Módulo</button>
               {% else %}
-                <button class="btn btn-info btn-xs enviar-correo-por-mod-miembro emv-{{m.id}}-{{m.cargo}}" data-id="{{capacitacion_id}}"
-                        data-mi="{{m.id}}-{{m.cargo}}" data-cargo="{{m.cargo}}" data-persona="{{m.persona_id}}" data-modulo="{{acta.modulo_id}}" style="margin-top:2px;margin-left:2px;">
-                <i class="fa fa-envelope">Módulo</i></button>
+                <button class="btn btn-info enviar-correo-por-mod-miembro emv-{{m.id}}-{{m.cargo}}" data-id="{{capacitacion_id}}"
+                        data-mi="{{m.id}}-{{m.cargo}}" data-cargo="{{m.cargo}}" data-persona="{{m.persona_id}}" data-modulo="{{acta.modulo_id}}">
+                <i class="fa fa-envelope"></i> Módulo</button>
               {% endif %}
             </td>
             {% endif %}

@@ -19,7 +19,7 @@ $("#list-capacitacion").on('click', '.enviar-correo-unico-miembro', function() {
       url : `${url}?cargo=${cargo}`,
       type : "GET",
       success : function(data) {
-        $(`#list-capacitacion .emv-${miembro_id}`).html("<i class='fa fa-envelope'>Enviar</i>");
+        $(`#list-capacitacion .emv-${miembro_id}`).html("<i class='fa fa-envelope'></i> Enviar");
         if(data.errores.length){
           msj = `Error al enviar correo(s): \n ${data.errores}`;
           tipo_error = "warning";
@@ -39,7 +39,7 @@ $("#list-capacitacion").on('click', '.enviar-correo-unico-miembro', function() {
           text: "Ocurrio un error intente nuevamente",
           type: "warning"
         });
-        $(`#list-capacitacion .emv-${miembro_id}`).html("<i class='fa fa-envelope'>Enviar</i>");
+        $(`#list-capacitacion .emv-${miembro_id}`).html("<i class='fa fa-envelope'></i> Enviar");
       }
     })
   }).catch(() => {
@@ -68,7 +68,7 @@ $("#list-capacitacion").on('click', '.enviar-correo-unico', function() {
       url : `${url}?cargo=${cargo}`,
       type : "GET",
       success : function(data) {
-        $(`#list-capacitacion .elv-${acta_id}`).html("<i class='fa fa-envelope'>Enviar</i>");
+        $(`#list-capacitacion .elv-${acta_id}`).html("<i class='fa fa-envelope'></i> Enviar");
         if(data.errores.length){
           console.log(data.errores)
           msj = `Error al enviar correo(s): \n ${data.errores}`;
@@ -89,7 +89,7 @@ $("#list-capacitacion").on('click', '.enviar-correo-unico', function() {
           text: "Ocurrio un error intente nuevamente",
           type: "warning"
         });
-        $(`#list-capacitacion .elv-${acta_id}`).html("<i class='fa fa-envelope'>Enviar</i>");
+        $(`#list-capacitacion .elv-${acta_id}`).html("<i class='fa fa-envelope'></i> Enviar");
       }
     })
   }).catch(() => {
@@ -119,7 +119,7 @@ $("#list-capacitacion").on('click', '.enviar-correo-por-mod-miembro', function()
       url : `${url}?cargo=${cargo}`,
       type : "GET",
       success : function(data) {
-        $(`#list-capacitacion .emv-${miembro_id}`).html("<i class='fa fa-envelope'>Enviar</i>");
+        $(`#list-capacitacion .emv-${miembro_id}`).html("<i class='fa fa-envelope'></i> Enviar");
         if(data.errores.length){
           msj = `Error al enviar correo(s): \n ${data.errores}`;
           tipo_error = "warning";
@@ -139,7 +139,7 @@ $("#list-capacitacion").on('click', '.enviar-correo-por-mod-miembro', function()
           text: "Ocurrio un error intente nuevamente",
           type: "warning"
         });
-        $(`#list-capacitacion .emv-${miembro_id}`).html("<i class='fa fa-envelope'>Enviar</i>");
+        $(`#list-capacitacion .emv-${miembro_id}`).html("<i class='fa fa-envelope'></i> Enviar");
       }
     })
   }).catch(() => {
@@ -169,7 +169,7 @@ $("#list-capacitacion").on('click', '.enviar-correo-por-mod', function() {
       url : `${url}?cargo=${cargo}`,
       type : "GET",
       success : function(data) {
-        $(`#list-capacitacion .elv-${acta_id}`).html("<i class='fa fa-envelope'>Enviar</i>");
+        $(`#list-capacitacion .elv-${acta_id}`).html("<i class='fa fa-envelope'></i> Enviar");
         if(data.errores.length){
           console.log(data.errores)
           msj = `Error al enviar correo(s): \n ${data.errores}`;
@@ -190,7 +190,7 @@ $("#list-capacitacion").on('click', '.enviar-correo-por-mod', function() {
           text: "Ocurrio un error intente nuevamente",
           type: "warning"
         });
-        $(`#list-capacitacion .elv-${acta_id}`).html("<i class='fa fa-envelope'>Enviar</i>");
+        $(`#list-capacitacion .elv-${acta_id}`).html("<i class='fa fa-envelope'></i> Enviar");
       }
     })
   }).catch(() => {
