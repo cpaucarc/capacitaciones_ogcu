@@ -766,7 +766,7 @@ class GeneraCertificadoPdf(LoginRequiredMixin, PdfCertView):
         self.style1 = getSampleStyleSheet()['Normal']
         self.style1.fontSize = 6
         self.style2 = getSampleStyleSheet()['Normal']
-        self.style2.fontSize = 15
+        self.style2.fontSize = 16
         self.style2.alignment = TA_CENTER
         self.style3 = getSampleStyleSheet()['Normal']
         self.style3.fontSize = 13
@@ -837,20 +837,20 @@ class GeneraCertificadoPdf(LoginRequiredMixin, PdfCertView):
         logo_unasam = os.path.join(F'{STATIC_ROOT}', 'img', 'unasam_logo_oficial.jpg')
         logo_ogcu = os.path.join(F'{STATIC_ROOT}', 'img', 'ogcu_logo_oficial.jpg')
         self.canvas.drawImage(ImageReader(logo_unasam), 100, 645, 90, 90)
-        self.canvas.drawImage(ImageReader(logo_ogcu), 360, 645, 124, 90)
+        self.canvas.drawImage(ImageReader(logo_ogcu), 360, 645, 117, 85)
 
         titulo = Paragraph('<b>CERTIFICADO</b>', style=self.style2)
         w, h = titulo.wrap(440, 0)
         titulo.drawOn(self.canvas, 85, 595 - h)
 
-        otorgado = Paragraph('El Centro de Educación Continua de la Universidad Nacional Santiago Antúnez de Mayolo certifica que:',
+        otorgado = Paragraph('La Oficina General de Calidad Universitaria de la Universidad Nacional Santiago Antúnez de Mayolo certifica que:',
             style=self.style4)
         w, h = otorgado.wrap(440, 0)
         otorgado.drawOn(self.canvas, 85, 535 - h)
         
         nombre_completo = Paragraph('<b>{}</b>'.format(self.persona.nombre_completo.upper()), style=self.style_fullname)
         w, h = nombre_completo.wrap(440, 0)
-        nombre_completo.drawOn(self.canvas, 85, 480 - h)
+        nombre_completo.drawOn(self.canvas, 85, 475 - h)
 
         contador += 1
         n_correlativo = ''
@@ -897,7 +897,7 @@ class GeneraCertificadoPdf(LoginRequiredMixin, PdfCertView):
                 n_correlativo = res_correlativo.correlativo
 
         w, h = parrafo1.wrap(440, 0)
-        parrafo1.drawOn(self.canvas, 85, 445 - h)
+        parrafo1.drawOn(self.canvas, 85, 440 - h)
         
         fecha_lugar = Paragraph('Huaraz, {} de {} de {}'.format(self.fecha_culminado.day, mes[self.fecha_culminado.month], self.fecha_culminado.year),
             style=self.style_right)

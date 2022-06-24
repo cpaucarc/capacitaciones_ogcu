@@ -1,11 +1,11 @@
 .ina {
   display: none !important;
 }
-
+/*
 body {
   color: black;
 }
-
+*/
 .white {
   color: white;
 }
@@ -15,8 +15,8 @@ table {
 }
 
 .container-fluid {
-  padding-left: 0;
-  background-color: #3c8dbc;
+  /*padding-left: 0;*/
+  /*background-color: #222D32;*/
   height:50px;
 }
 
@@ -53,7 +53,7 @@ table {
 
 .style-2::-webkit-scrollbar-thumb {
   background-color: #222d32;
-  border-radius: 10px;
+  /*border-radius: 10px;*/
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
 }
 
@@ -67,7 +67,7 @@ table {
 
 .style-2::-webkit-scrollbar-track {
   background-color: #9a9a9a;
-  border-radius: 10px;
+/*  border-radius: 10px;*/
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
@@ -119,12 +119,12 @@ table {
   font-size: 3.5em;
 }
 
-.btn {
+/*.btn {
   color: white;
-}
+}*/
 
 /*panels*/
-.panel-success .panel-heading .boton-add, .btn-success {
+/*.panel-success .panel-heading .boton-add, .btn-success {
   background-color: #378a37 !important;
   border-color: #378a37;
 }
@@ -195,7 +195,7 @@ table {
 .pagination > .active > a {
   background-color: #96a8ae !important;
 }
-
+*/
 /*NAV*/
 .navbar {
   /*background-color: #3c8dbc;*/
@@ -216,7 +216,7 @@ table {
 }
 
 .logo-box {
-  background-color: #367fa9;
+  /*background-color: #367fa9;*/
   max-height: 4.5em;
   height: 3.30em;
   width: 6em;
@@ -391,8 +391,8 @@ table {
 
 /*page content */
 #wrapper #page-content-wrapper {
-  margin-left: -80px;
-  margin-right: 0;
+  /*margin-left: -80px;
+  margin-right: 0;*/
   position: relative;
   transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
@@ -402,10 +402,7 @@ table {
 }
 
 .mi-slider .container {
-  left: 11%;
-  margin-top: 6rem;
-  position: absolute;
-  right: 6rem;
+  margin-top: 8rem;
 }
 
 /*dashboard*/
@@ -635,8 +632,9 @@ table {
 
 @media (max-width: 980px) {
   .mi-slider .container {
-    left: 24%;
-    width: 74%;
+    /*left: 24%;
+    width: 74%;*/
+    width: 95%;
   }
 }
 
@@ -690,8 +688,9 @@ table {
 
 @media only screen and (min-width: 992px) {
   .mi-slider .container {
-    left: 16%;
-    width: 80%;
+/*    left: 16%;
+    width: 80%;*/
+    width: 95%;
   }
 }
 
@@ -785,7 +784,8 @@ input[type="checkbox"] {
 }
 
 .logo-peque{
-  width:60px;
+  width:48px;
+  margin-top: -12px;
 }
 
 .col-form-label{
@@ -834,6 +834,12 @@ input[type="checkbox"] {
 
 #icon-usuario{
   font-size:25px;
+  margin-top:5px;
+  padding:5px;
+}
+
+/*Estilos para navbar*/
+.icon-usuario{
   margin-top:5px;
   padding:5px;
 }
