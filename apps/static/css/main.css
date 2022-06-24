@@ -493,13 +493,12 @@ td.btn-doble {
 }
 
 .logo-licenciado {
-  padding: 0px 10px 0px 0px;
-  width: 8%;
+  padding: 0px 5px 0px 0px;
+  width: 50px;
 }
 
 .logo-login-unasam {
-   width: 60%;
-   margin-top:0%;
+   width: 200px;
 }
 
 .navbar {
