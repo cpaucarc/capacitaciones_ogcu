@@ -335,7 +335,7 @@ pip-selfcheck.json
 
 ### Project template
 
-# apps/media/
+ apps/media/
 
 .pytest_cache/
 
