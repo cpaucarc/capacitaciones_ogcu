@@ -165,12 +165,9 @@
               <button class="btn btn-info enviar-correo-unico-miembro emv-{{m.id}}-{{m.cargo}}"
                 data-id="{{capacitacion_id}}" data-mi="{{m.id}}-{{m.cargo}}" data-cargo="{{m.cargo}}"
                 data-persona="{{m.persona_id}}">
-                <i class="fa fa-envelope"></i> Certificado Único</button>
+                <i class="fa fa-envelope"></i> CertificadoYY Único</button>
               {% elif tipo_emision_cert == 'certificado_unico_y_modulos' and mostrar_pdf_unico %}
-              <button class="btn btn-info enviar-correo-unico-miembro emv-{{m.id}}-{{m.cargo}}"
-                data-id="{{capacitacion_id}}" data-mi="{{m.id}}-{{m.cargo}}" data-cargo="{{m.cargo}}"
-                data-persona="{{m.persona_id}}">
-                <i class="fa fa-envelope"></i> Certificado Único</button>
+
               <button class="btn btn-info enviar-correo-por-mod-miembro emv-{{m.id}}-{{m.cargo}}"
                 data-id="{{capacitacion_id}}" data-mi="{{m.id}}-{{m.cargo}}" data-cargo="{{m.cargo}}"
                 data-persona="{{m.persona_id}}" data-modulo="{{acta.modulo_id}}">
@@ -183,15 +180,15 @@
               {% endif %}
               <td>
                 {% if tipo_emision_cert == 'certificado_unico' %}
-                <button class="btn btn-info btn-xs enviar-correo-unico-miembro emv-{{m.id}}-{{m.cargo}}"
+                <button class="btn btn-info enviar-correo-unico-miembro emv-{{m.id}}-{{m.cargo}}"
                   data-id="{{capacitacion_id}}" data-mi="{{m.id}}-{{m.cargo}}" data-cargo="{{m.cargo}}"
-                  data-persona="{{m.persona_id}}" style="margin-top:2px;margin-left:2px;">
-                  <i class="fa fa-envelope">Cert. Único</i></button>
+                  data-persona="{{m.persona_id}}">
+                  <i class="fa fa-envelope"></i> Certificado Único</button>
                 {% elif tipo_emision_cert == 'certificado_unico_y_modulos' and mostrar_pdf_unico %}
                 <button class="btn btn-info btn-xs enviar-correo-unico-miembro emv-{{m.id}}-{{m.cargo}}"
                   data-id="{{capacitacion_id}}" data-mi="{{m.id}}-{{m.cargo}}" data-cargo="{{m.cargo}}"
                   data-persona="{{m.persona_id}}" style="margin-top:2px;margin-left:2px;">
-                  <i class="fa fa-envelope">Cert. Único</i></button>
+                  <i class="fa fa-envelope">Cert.tt Único</i></button>
                 <button class="btn btn-info btn-xs enviar-correo-por-mod-miembro emv-{{m.id}}-{{m.cargo}}"
                   data-id="{{capacitacion_id}}" data-mi="{{m.id}}-{{m.cargo}}" data-cargo="{{m.cargo}}"
                   data-persona="{{m.persona_id}}" data-modulo="{{acta.modulo_id}}"
