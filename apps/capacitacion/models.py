@@ -41,7 +41,7 @@ class EquipoProyecto(models.Model):
 
 
 class Modulo(models.Model):
-    nombre = models.CharField(max_length=45, blank=True, null=True)
+    nombre = models.CharField(max_length=200, blank=True, null=True)
     horas_academicas = models.PositiveIntegerField()
     temas = models.TextField(max_length=1000)
     se_envio_correo = models.BooleanField(default=False)
