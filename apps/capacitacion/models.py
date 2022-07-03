@@ -12,14 +12,14 @@ from apps.persona.models import Persona
 
 
 class Capacitacion(BaseModel):
-    nombre = models.CharField(max_length=250)
+    nombre = models.CharField(max_length=400)
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
     descripcion_horario = models.CharField(max_length=250, blank=True, null=True)
     canal_reunion = models.CharField(max_length=100, blank=True, null=True)
     beneficiarios = models.CharField(max_length=100, blank=True, null=True)
     justificacion = models.CharField(max_length=250, blank=True, null=True)
-    objetivo = models.CharField(max_length=250, blank=True, null=True)
+    objetivo = models.TextField(max_length=2000, blank=True, null=True)
     certificacion = models.CharField(max_length=250, blank=True, null=True)
     ruta_proyecto_pdf = models.FileField(upload_to="proyectos", blank=True, null=True)
     observacion = models.CharField(max_length=250, blank=True, null=True)
@@ -41,9 +41,9 @@ class EquipoProyecto(models.Model):
 
 
 class Modulo(models.Model):
-    nombre = models.CharField(max_length=200, blank=True, null=True)
+    nombre = models.CharField(max_length=400, blank=True, null=True)
     horas_academicas = models.PositiveIntegerField()
-    temas = models.TextField(max_length=1000)
+    temas = models.TextField(max_length=1500, null=True)
     se_envio_correo = models.BooleanField(default=False)
     capacitacion = models.ForeignKey(Capacitacion, on_delete=models.PROTECT)
 

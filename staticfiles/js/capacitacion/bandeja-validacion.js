@@ -62,13 +62,6 @@ $(document).ready(function () {
       observarCapacitacion($(this),id);
     }else if (selectedOption && array_estado.indexOf(selectedOption)>=0){
       revisarCapacitacion($(this),id, selectedOption);
-    }else{
-      swal({
-        title: "Alerta",
-        html: "No puede cambiar a estado por validar",
-        type: "warning"
-      });
-      $(this).val($(`#estado-${id}`).val());
     }
   });
 

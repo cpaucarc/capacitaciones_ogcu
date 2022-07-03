@@ -16,17 +16,22 @@ class CapacitacionForm(forms.ModelForm):
     descripcion_horario = forms.CharField(label='Descripción de horario', widget=forms.TextInput(
         attrs={'class': 'form-control input-sm'}))
     beneficiarios = forms.CharField(label='Beneficiario', widget=forms.TextInput(
-        attrs={'class': 'form-control input-sm'}))
+        attrs={'class': 'form-control input-sm'}), required=False)
     canal_reunion = forms.CharField(label='Canal de la reunión', widget=forms.TextInput(
         attrs={'class': 'form-control input-sm'}))
-    objetivo = forms.CharField(label='Objetivo', widget=forms.TextInput(
-        attrs={'class': 'form-control input-sm'}))
+    objetivo = forms.CharField(
+        label='Objetivos',
+        widget=forms.Textarea(attrs={
+            'class': 'form-control input-sm',
+            'rows': 4,
+            'placeholder':'- Objetivo 1\n- Objetivo 2\n- Objetivo 3\n...'}),
+        required=False)
     justificacion = forms.CharField(label='Justificación', widget=forms.TextInput(
-        attrs={'class': 'form-control input-sm'}))
+        attrs={'class': 'form-control input-sm'}), required=False)
     certificacion = forms.CharField(label='Certificación', widget=forms.TextInput(
         attrs={'class': 'form-control input-sm'}))
     observacion = forms.CharField(label='Observación', widget=forms.TextInput(
-        attrs={'class': 'form-control input-sm'}))
+        attrs={'class': 'form-control input-sm'}), required=False)
     ruta_proyecto_pdf = forms.FileField(label='Archivo PDF',
                                         widget=forms.FileInput(attrs={'class': 'form-control input-sm'}))
     persona_select = forms.CharField(required=False, label='Seleccionar Miembro',
@@ -53,7 +58,8 @@ class CapacitacionForm(forms.ModelForm):
 class ModuloForm(forms.ModelForm):
     temas = forms.CharField(
         widget=forms.Textarea(
-            attrs={'class': 'form-control', 'rows': 4, 'cols': 50, 'placeholder': '-tema 1\n-tema 2\n-tema 3\n...'})
+            attrs={'class': 'form-control', 'rows': 4, 'cols': 50, 'placeholder': '- Tema 1\n- Tema 2\n- Tema 3\n...'}),
+        required=False
     )
     nombre = forms.CharField(label='Nombre', widget=forms.TextInput(
         attrs={'class': 'form-control'}))

@@ -32,18 +32,20 @@
       <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <fieldset class="border p-2">
-          <legend class="scheduler-border" style="width: 110px!important; font-size:12px;"> Datos del proyecto </legend>
+          <legend class="scheduler-border" style="width: 210px!important; font-size:14px; margin: 15px 20px; padding-left: 10px;">
+              Datos del proyecto
+          </legend>
         <div class="col-lg-12">
           <div class="col-lg-6">
-             <label class="txt-label">Nombre del proyecto de Capacitación <label class="text-danger">*</label></label>
+             <label class="txt-label">Nombre del proyecto de Capacitación<span class="asteriskField">*</span></label>
             {% field form.nombre cols=False label=False %}
           </div>
           <div class="col-md-3">
-            <label class="txt-label">Fecha Inicio <label class="text-danger">*</label></label>
+            <label class="txt-label">Fecha Inicio<span class="asteriskField">*</span></label>
             {% field form.fecha_inicio cols=False label=False %}
           </div>
           <div class="col-md-3">
-            <label class="txt-label">Fecha Fin <label class="text-danger">*</label></label>
+            <label class="txt-label">Fecha Fin<span class="asteriskField">*</span></label>
             {% field form.fecha_fin cols=False label=False %}
           </div>
         </div>
@@ -52,13 +54,13 @@
           {% field form.beneficiarios cols=True %}
           {% field form.objetivo cols=True %}
           {% field form.certificacion cols=True %}
-          {% field form.ruta_proyecto_pdf cols=True %}
         </div>
         <div class="col-lg-6">
           {% field form.canal_reunion cols=True %}
           {% field form.justificacion cols=True %}
           {% field form.observacion cols=True %}
           {% field form.tipo_emision_certificado cols=True %}
+          {% field form.ruta_proyecto_pdf cols=True %}
         </div>
           {% if archivo %}
           <div id="div_id_archivo_cargado" class="form-group row">
@@ -70,16 +72,20 @@
           </div>
           {% endif %}
         </fieldset>
+          <br>
         <fieldset class="border p-2">
-          <legend class="scheduler-border" style="width: 180px!important; font-size:14px;"> Agregar temario por módulo</legend>
+          <legend class="scheduler-border" style="width: 210px!important; font-size:14px; margin: 15px 20px; padding-left: 10px;">
+              Agregar temario por módulo
+          </legend>
           <div class="col-lg-2 pull-right">
             <button class="btn btn-success btn-sm" id="btn-agregar" type="button">Agregar Módulo</button>
           </div>
           <br>&nbsp;
           {% include 'capacitacion/partials/modulos_formset.html' %}
         </fieldset>
+          <br>
         <fieldset class="border p-2">
-          <legend class="scheduler-border" style="width: 180px!important; font-size:14px;">
+          <legend class="scheduler-border" style="width: 210px!important; font-size:14px; margin: 15px 20px; padding-left: 10px;">
             Agregar equipo de proyecto
           </legend>
           <div class="col-lg-12">
@@ -102,14 +108,14 @@
           <div class="row">
             <div class="col-lg-8"></div>
             <div class="col-lg-4" align="right">
-              <a href="#" class="btn btn-danger btn-sm">Cancel</a>
+              <a href="#" class="btn btn-danger btn-sm">Cancelar</a>
               &nbsp;
               <button type="submit" class="btn btn-primary btn-sm" id="btn-guardar">Guardar</button>
             </div>
           </div>
         </div>
       </form>
-      &nbsp;
+      &nbsp;<br/><br/><br/>
       <div class="tab-content table-responsive">
         <table class="table table-bordered table-hover table-striped table-responsive"
                id="lista-capacitacion"
