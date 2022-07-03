@@ -1,7 +1,7 @@
 # Django Project
 
 ## Instalacion y despliegue
-    - instalar python3.9 en ubuntu 18.04
+    Instalar python3.9 en ubuntu 18.04
     - sudo apt update
     - sudo apt install software-properties-common
     - sudo add-apt-repository ppa:deadsnakes/ppa
